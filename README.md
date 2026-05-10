@@ -14,7 +14,7 @@ This project implements a **near real-time data analytics pipeline** rather than
 
 ## Architecture Diagram
 
-![image]()
+![image](https://github.com/user-attachments/assets/3d153707-5548-46c4-9a53-ca27786f4bd2)
 
 *Figure 1: AWS Stock Market Real-Time Data Analytics Pipeline integrating Kinesis Data Streams, Lambda, DynamoDB, S3, Glue Data Catalog, Athena, and SNS.*
 
