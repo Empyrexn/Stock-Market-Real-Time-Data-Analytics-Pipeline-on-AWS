@@ -120,6 +120,77 @@ The architecture illustrates the full stock market data analytics workflow:
 10. The trend analysis Lambda publishes Email/SMS alerts through Amazon SNS.
 
 ---
+Here you go — clean `.md` block ready to paste directly into your README:
+
+````md
+## Example Athena SQL Queries
+
+The following queries demonstrate how **Amazon Athena** can be used to analyze stock data stored in **Amazon S3**.
+
+### 1. Preview Stock Data
+```sql
+SELECT *
+FROM stock_data_table
+LIMIT 10;
+````
+
+### 2. Top 5 Stocks by Price Change
+
+```sql
+SELECT symbol, price, previous_close,
+       (price - previous_close) AS price_change
+FROM stock_data_table
+ORDER BY price_change DESC
+LIMIT 5;
+```
+
+### 3. Average Trading Volume Per Stock
+
+```sql
+SELECT symbol, AVG(volume) AS avg_volume
+FROM stock_data_table
+GROUP BY symbol;
+```
+
+### 4. Detect Anomalous Stock Movements (>5% Change)
+
+```sql
+SELECT symbol, price, previous_close,
+       ROUND(((price - previous_close) / previous_close) * 100, 2) AS change_percent
+FROM stock_data_table
+WHERE ABS(((price - previous_close) / previous_close) * 100) > 5;
+```
+
+### 5. Daily Average Closing Price
+
+```sql
+SELECT symbol,
+       DATE(timestamp) AS trading_day,
+       AVG(price) AS avg_price
+FROM stock_data_table
+GROUP BY symbol, DATE(timestamp)
+ORDER BY trading_day DESC;
+```
+
+### 6. Highest Volume Trades
+
+```sql
+SELECT symbol, volume, timestamp
+FROM stock_data_table
+ORDER BY volume DESC
+LIMIT 10;
+```
+
+### 7. Price Trend Over Time (Single Stock)
+
+```sql
+SELECT timestamp, price
+FROM stock_data_table
+WHERE symbol = 'AAPL'
+ORDER BY timestamp ASC;
+```
+These queries highlight Athena's ability to perform **serverless SQL analytics** directly on data stored in S3, enabling fast and cost-effective insights without managing database infrastructure.
+
 
 ## Objectives
 
